@@ -1,0 +1,24 @@
+#!/bin/bash
+# Example startup script for the RoArm demo server.
+# Copy and adjust for your machine. Simulation mode is the default.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+VENV_DIR="${ROARM_VENV_DIR:-${PROJECT_DIR}/.venv}"
+
+cd "${PROJECT_DIR}"
+
+if [[ -f "${VENV_DIR}/bin/activate" ]]; then
+  # shellcheck source=/dev/null
+  source "${VENV_DIR}/bin/activate"
+fi
+
+# Leave ROBOT_SERIAL_PORT unset for simulation mode.
+# export ROBOT_SERIAL_PORT=/dev/ttyUSB0
+export ROBOT_BAUDRATE="${ROBOT_BAUDRATE:-115200}"
+export ROARM_API_HOST="${ROARM_API_HOST:-127.0.0.1}"
+export ROARM_API_PORT="${ROARM_API_PORT:-5005}"
+
+python3 roarm_api_server.py
