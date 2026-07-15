@@ -5,7 +5,7 @@ Browser-based robotic arm control with a Flask API, serial communication abstrac
 This repository is provided as a portfolio and research demonstration.
 No license for reuse or redistribution is granted.
 
----
+--- 
 
 ## Overview
 
